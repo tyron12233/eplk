@@ -25,7 +25,7 @@ class EplkList(
         // Check if the other object is a list
         if (other is EplkList) {
             // Do addAll
-            return result.success(EplkList(scope, (list + other.list) as ArrayList<EplkObject>))
+            return result.success(EplkList(parentScope, (list + other.list) as ArrayList<EplkObject>))
         }
 
         // If not, then add the object to the list
@@ -47,7 +47,7 @@ class EplkList(
                 "Index value can only bean Integer, got ${eplkObject.objectName} instead",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             ))
         }
 
@@ -57,7 +57,7 @@ class EplkList(
                 "Index is ${if (eplkObject.value >= list.size) "too big" else "too small"}, index provided is ${eplkObject.value} but the list size is ${list.size}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             ))
         }
 

@@ -7,6 +7,32 @@ import com.iyxan23.eplk.errors.SyntaxError
 import com.iyxan23.eplk.lexer.models.Position
 import com.iyxan23.eplk.lexer.models.Token
 
+val keywords = mapOf(
+    "null" to Tokens.NULL,
+
+    "true" to Tokens.TRUE,
+    "false" to Tokens.FALSE,
+
+    "if" to Tokens.IF,
+    "elif" to Tokens.ELIF,
+    "else" to Tokens.ELSE,
+
+    "for" to Tokens.FOR,
+
+    "while" to Tokens.WHILE,
+
+    "fun" to Tokens.FUN,
+
+    "return" to Tokens.RETURN,
+    "continue" to Tokens.CONTINUE,
+    "break" to Tokens.BREAK,
+
+    "var" to Tokens.VAR,
+
+    "composable" to Tokens.COMPOSABLE,
+)
+
+
 /**
  * This class turns a string code into a list of tokens
  *
@@ -229,6 +255,11 @@ class Lexer(
                     advance()
                 }
 
+                currentChar == ':' -> {
+                    tokens.add(Token(Tokens.COLON, null, position.copy()))
+                    advance()
+                }
+
                 currentChar == '(' -> {
                     tokens.add(Token(Tokens.PAREN_OPEN, null, position.copy()))
                     advance()
@@ -383,27 +414,6 @@ class Lexer(
         // wat? the string doesn't end? throw an error
         throwError(SyntaxError("EOL while reading a string literal", stringStartPosition, position.copy()))
     }
-
-    private val keywords = mapOf(
-        "true" to Tokens.TRUE,
-        "false" to Tokens.FALSE,
-
-        "if" to Tokens.IF,
-        "elif" to Tokens.ELIF,
-        "else" to Tokens.ELSE,
-
-        "for" to Tokens.FOR,
-
-        "while" to Tokens.WHILE,
-
-        "fun" to Tokens.FUN,
-
-        "return" to Tokens.RETURN,
-        "continue" to Tokens.CONTINUE,
-        "break" to Tokens.BREAK,
-
-        "var" to Tokens.VAR,
-    )
 
     private fun parseIdentifier() {
         val identifierStartPosition = position.copy()

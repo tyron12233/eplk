@@ -23,7 +23,7 @@ open class EplkRuntimeError(
         result.append("Traceback: \n")
 
         while (currentScope != null) {
-            result.appendLine(" - Filename ${currentPosition!!.filename} inside ${currentScope.name} at line ${currentPosition.line}")
+            result.appendLine(" - Filename ${currentPosition?.filename ?: "Unknown file"} inside ${currentScope.name} at line ${currentPosition?.line ?: "Unknown line"}")
 
             currentPosition = currentScope.parentPosition
             currentScope = currentScope.parent

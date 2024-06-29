@@ -13,8 +13,8 @@ import kotlin.math.pow
  */
 class EplkInteger(
     var value: Int,
-    override val scope: Scope
-) : EplkObject(scope) {
+    override val parentScope: Scope
+) : EplkObject(parentScope) {
 
     override val objectName = "Integer"
 
@@ -28,10 +28,10 @@ class EplkInteger(
 
         return when (other) {
             is EplkInteger ->
-                RealtimeResult<EplkObject>().success(EplkInteger(value + other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkInteger(value + other.value, parentScope))
 
             is EplkFloat ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value + other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value + other.value, parentScope))
 
             else ->
                 RealtimeResult<EplkObject>().failure(
@@ -39,7 +39,7 @@ class EplkInteger(
                     "+ operator with ${other.objectName} is not supported",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }
@@ -53,10 +53,10 @@ class EplkInteger(
 
         return when (other) {
             is EplkInteger ->
-                RealtimeResult<EplkObject>().success(EplkInteger(value - other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkInteger(value - other.value, parentScope))
 
             is EplkFloat ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value - other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value - other.value, parentScope))
 
             else ->
                 RealtimeResult<EplkObject>().failure(
@@ -64,7 +64,7 @@ class EplkInteger(
                     "- operator with ${other.objectName} is not supported",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }
@@ -78,10 +78,10 @@ class EplkInteger(
 
         return when (other) {
             is EplkInteger ->
-                RealtimeResult<EplkObject>().success(EplkInteger(value * other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkInteger(value * other.value, parentScope))
 
             is EplkFloat ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value * other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value * other.value, parentScope))
 
             else ->
                 RealtimeResult<EplkObject>().failure(
@@ -89,7 +89,7 @@ class EplkInteger(
                     "* operator with ${other.objectName} is not supported",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }
@@ -103,10 +103,10 @@ class EplkInteger(
 
         return when (other) {
             is EplkInteger ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat() / other.value.toFloat(), scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat() / other.value.toFloat(), parentScope))
 
             is EplkFloat ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value / other.value, scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value / other.value, parentScope))
 
             else ->
                 RealtimeResult<EplkObject>().failure(
@@ -114,7 +114,7 @@ class EplkInteger(
                     "/ operator with ${other.objectName} is not supported",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }
@@ -128,10 +128,10 @@ class EplkInteger(
 
         return when (other) {
             is EplkInteger ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat().pow(other.value), scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat().pow(other.value), parentScope))
 
             is EplkFloat ->
-                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat().pow(other.value), scope))
+                RealtimeResult<EplkObject>().success(EplkFloat(value.toFloat().pow(other.value), parentScope))
 
             else ->
                 RealtimeResult<EplkObject>().failure(
@@ -139,7 +139,7 @@ class EplkInteger(
                     "^ operator with ${other.objectName} is not supported",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }
@@ -217,7 +217,7 @@ class EplkInteger(
                     "Comparison with Integer must be either an other Integer or Float. Expected Integer / Float, got ${other.objectName}",
                     startPosition,
                     endPosition,
-                    scope
+                    parentScope
                 )
                 )
         }

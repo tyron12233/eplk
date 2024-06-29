@@ -1,6 +1,11 @@
 package com.iyxan23.eplk
 
 enum class Tokens {
+
+    NULL,
+
+    COMPOSABLE,
+
     // Arithmetic tokens
     PLUS,
     MINUS,
@@ -40,6 +45,7 @@ enum class Tokens {
 
     FOR,
     SEMICOLON,
+    COLON,
 
     FUN,
     COMMA,

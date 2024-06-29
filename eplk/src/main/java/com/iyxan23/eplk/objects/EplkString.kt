@@ -8,8 +8,8 @@ import com.iyxan23.eplk.lexer.models.Position
 
 class EplkString(
     val value: String,
-    override val scope: Scope,
-) : EplkObject(scope) {
+    override val parentScope: Scope,
+) : EplkObject(parentScope) {
     override val objectName: String = "String"
     override fun toString(): String = value
 
@@ -26,11 +26,11 @@ class EplkString(
                 "String cannot be added with ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             ))
         }
 
-        return result.success(EplkString(value + other.value, scope))
+        return result.success(EplkString(value + other.value, parentScope))
     }
 
     override fun operatorMultiply(
@@ -46,11 +46,11 @@ class EplkString(
                 "String cannot be multiplied with ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             ))
         }
 
-        return result.success(EplkString(value.repeat(other.value), scope))
+        return result.success(EplkString(value.repeat(other.value), parentScope))
     }
 
     override fun comparisonTo(
@@ -67,7 +67,7 @@ class EplkString(
                 "String cannot be compared with ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             ))
         }
 

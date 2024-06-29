@@ -8,8 +8,8 @@ import com.iyxan23.eplk.lexer.models.Position
 
 class EplkBoolean(
     val value: Boolean,
-    override val scope: Scope,
-) : EplkObject(scope) {
+    override val parentScope: Scope,
+) : EplkObject(parentScope) {
 
     override val objectName: String = "Boolean"
 
@@ -31,7 +31,7 @@ class EplkBoolean(
                 "Comparison on boolean must be with the same type. Expected Boolean, got ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             )
             )
         }
@@ -57,12 +57,12 @@ class EplkBoolean(
                 "&& operator with boolean must be with the same type. Expected Boolean, got ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             )
             )
         }
 
-        return RealtimeResult<EplkObject>().success(EplkBoolean(value.and(other.value), scope))
+        return RealtimeResult<EplkObject>().success(EplkBoolean(value.and(other.value), parentScope))
     }
 
     override fun orOperator(
@@ -79,18 +79,18 @@ class EplkBoolean(
                 "|| operator with boolean must be with the same type. Expected Boolean, got ${other.objectName}",
                 startPosition,
                 endPosition,
-                scope
+                parentScope
             )
             )
         }
 
-        return RealtimeResult<EplkObject>().success(EplkBoolean(value.or(other.value), scope))
+        return RealtimeResult<EplkObject>().success(EplkBoolean(value.or(other.value), parentScope))
     }
 
     override fun notOperator(
         startPosition: Position,
         endPosition: Position
     ): RealtimeResult<EplkObject> {
-        return RealtimeResult<EplkObject>().success(EplkBoolean(!value, scope))
+        return RealtimeResult<EplkObject>().success(EplkBoolean(!value, parentScope))
     }
 }

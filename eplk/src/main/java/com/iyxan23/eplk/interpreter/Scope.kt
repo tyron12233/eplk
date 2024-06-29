@@ -15,8 +15,8 @@ data class Scope(
     // Assigns a variable to a value depending on the scope
     fun assignVariable(name: String, value: EplkObject) {
         // always prefer local scope
-        if (symbolTable.variables.containsKey(name)) {
-            symbolTable.variables[name] = value
+        if (this@Scope.symbolTable.symbols.containsKey(name)) {
+            this@Scope.symbolTable.symbols[name] = value
 
         } else {
             // Then do set variable on the parent scope, if exists
@@ -32,9 +32,9 @@ data class Scope(
     // TODO: 6/26/21 Learn more about static scoping
     fun searchVariable(name: String): EplkObject? {
         // First search it on the local scope
-        if (symbolTable.variables.containsKey(name)) {
+        if (this@Scope.symbolTable.symbols.containsKey(name)) {
             // Got the variable, return it
-            return symbolTable.variables[name]
+            return this@Scope.symbolTable.symbols[name]
 
         } else {
             // Ok, check the parent scope if it's null or no
